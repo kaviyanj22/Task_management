@@ -13,5 +13,6 @@ namespace Task_Management_System.Services.Interface
         void DeleteTask(int id);
 
         List<TaskItemResponseDto> SearchTasks(string name);
+        void ChangeStatus(int id, ChangeStatusDto dto);
     }
 }

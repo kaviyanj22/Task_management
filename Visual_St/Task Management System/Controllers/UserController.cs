@@ -29,7 +29,59 @@ namespace Task_Management_System.Controllers
             return Ok(_service.GetAllUsers());
         }
 
-      
+        [HttpPost("AddUser")]
+        public IActionResult AddUser(CreateUserDto dto)
+        {
+            try
+            {
+                _service.AddUser(dto);
+                return Ok("User Added Successfully");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
 
-    }
+        [HttpGet("{id}")]
+        public IActionResult GetUserById(int id)
+        {
+            try
+            {
+                var user = _service.GetUserById(id);
+
+                if (user == null)
+                {
+                    return NotFound("User not found");
+                }
+
+                return Ok(user);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("{id}/tasks")]
+        public IActionResult GetUserWithTasks(int id)
+        {
+            try
+            {
+                var user = _service.GetUserWithTasks(id);
+
+                if (user == null)
+                {
+                    return NotFound("User not found");
+                }
+
+                return Ok(user);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+    }   
 }

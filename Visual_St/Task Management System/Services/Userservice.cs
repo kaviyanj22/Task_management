@@ -35,7 +35,40 @@ namespace Task_Management_System.Services
             return _repository.GetAllUsers();
         }
 
-        
+        public void AddUser(CreateUserDto dto)
+        {
+            if (string.IsNullOrWhiteSpace(dto.UserName))
+            {
+                throw new Exception("User Name is required");
+            }
+
+            if (string.IsNullOrWhiteSpace(dto.Email))
+            {
+                throw new Exception("Email is required");
+            }
+
+            _repository.AddUser(dto);
+        }
+
+        public User GetUserById(int id)
+        {
+            if (id <= 0)
+            {
+                throw new Exception("Invalid User Id");
+            }
+
+            return _repository.GetUserById(id);
+        }
+
+        public UserWithTasksDto GetUserWithTasks(int id)
+        {
+            if (id <= 0)
+            {
+                throw new Exception("Invalid User Id");
+            }
+
+            return _repository.GetUserWithTasks(id);
+        }
 
     }
 }

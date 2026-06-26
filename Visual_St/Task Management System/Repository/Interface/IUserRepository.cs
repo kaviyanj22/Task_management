@@ -6,6 +6,13 @@ namespace Task_Management_System.Repositories
     public interface IUserRepository
     {
         void CreateUser(CreateUserDto dto);
+
+        void AddUser(CreateUserDto dto);
+        User GetUserById(int id);
+        UserWithTasksDto GetUserWithTasks(int id);
         List<User> GetAllUsers();
+
+        
+        
     }
 }

@@ -66,6 +66,23 @@ namespace Task_Management_System.Controllers
             return Ok(_service.SearchTasks(name));
         }
 
+        [HttpPut("{id}/status")]
+        public IActionResult ChangeStatus(int id, ChangeStatusDto dto)
+        {
+            try
+            {
+                _service.ChangeStatus(id, dto);
+
+                return Ok("Task Status Updated Successfully");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+       
+
     }
 
 }

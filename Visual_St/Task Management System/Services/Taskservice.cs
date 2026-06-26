@@ -86,6 +86,28 @@ namespace Task_Management_System.Services
             return _repository.SearchTasks(name);
         }
 
+        public void ChangeStatus(int id, ChangeStatusDto dto)
+        {
+            if (id <= 0)
+            {
+                throw new Exception("Invalid Task Id");
+            }
+
+            if (string.IsNullOrWhiteSpace(dto.Status))
+            {
+                throw new Exception("Status is required");
+            }
+
+            if (dto.Status != "Todo" &&
+                dto.Status != "In Progress" &&
+                dto.Status != "Done")
+            {
+                throw new Exception("Status must be Todo, In Progress or Done");
+            }
+
+            _repository.ChangeStatus(id, dto);
+        }
+
     }
 
 }

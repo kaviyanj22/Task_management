@@ -143,5 +143,68 @@ namespace Task_Management_System.Repository
             return tasks;
         }
 
+        public void ChangeStatus(int id, ChangeStatusDto dto)
+        {
+            using SqlConnection con = new SqlConnection(_connectionString);
+
+            string query = @"UPDATE Tasks
+                     SET Status = @Status
+                     WHERE TaskId = @TaskId";
+
+            SqlCommand cmd = new SqlCommand(query, con);
+
+            cmd.Parameters.AddWithValue("@TaskId", id);
+            cmd.Parameters.AddWithValue("@Status", dto.Status);
+
+            con.Open();
+
+            int rows = cmd.ExecuteNonQuery();
+
+            if (rows == 0)
+            {
+                throw new Exception("Task not found");
+            }
+        }
+
+        public List<TaskItemResponseDto> SearchTasks(string name)
+        {
+            List<TaskItemResponseDto> tasks = new List<TaskItemResponseDto>();
+
+            using SqlConnection con = new SqlConnection(_connectionString);
+
+            string query = @"
+        SELECT
+            t.TaskId,
+            t.Title,
+            t.Description,
+            t.Status,
+            t.CreatedDate,
+            t.UserId
+        FROM Tasks t
+        WHERE t.Title LIKE @Title";
+
+            SqlCommand cmd = new SqlCommand(query, con);
+
+            cmd.Parameters.AddWithValue("@Title", "%" + name + "%");
+
+            con.Open();
+
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+                tasks.Add(new TaskItemResponseDto
+                {
+                    TaskId = Convert.ToInt32(reader["TaskId"]),
+                    Title = reader["Title"].ToString(),
+                    Description = reader["Description"].ToString(),
+                    Status = reader["Status"].ToString(),
+                    //CreatedDate = reader["CreatedDate"].ToString()
+                });
+            }
+
+            return tasks;
+        }
+
     }
 }
