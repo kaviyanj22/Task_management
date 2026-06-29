@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Management</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>User Management</h1>
+
+        <div class="form">
+
+            <label>User Name</label><br>
+            <input type="text" id="txtUserName"><br><br>
+
+            <label>Email</label><br>
+            <input type="email" id="txtEmail"><br><br>
+
+            <button id="btnAddUser">Add User</button>
+
+        </div>
+
+        <hr>
+
+        <table>
+
+            <thead>
+
+                <tr>
+
+                    <th>User ID</th>
+                    <th>User Name</th>
+                    <th>Email</th>
+                    <th>Action</th>
+
+                </tr>
+
+            </thead>
+
+            <tbody id="userTable">
+            </tbody>
+
+        </table>
+
+        <br>
+
+        <a href="dashboard.html">
+            <button>Back</button>
+        </a>
+
+    </div>
+
+    <script src="app.js"></script>
+
+</body>
+</html>

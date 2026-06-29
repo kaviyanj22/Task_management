@@ -1,0 +1,6 @@
+@Task_Management_System_HostAddress = http://localhost:5033
+
+GET {{Task_Management_System_HostAddress}}
+Accept: application/json
+
+###
